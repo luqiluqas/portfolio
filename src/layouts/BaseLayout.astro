@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  /** Person JSON-LD only on home to avoid noise */
+  personSchema?: boolean;
+}
+
+const { title, description, path = '/', personSchema = false } = Astro.props;
+const siteUrl = Astro.site?.toString() ?? 'https://luqiluqas.github.io';
+const canonical = new URL(path, Astro.site).toString();
+const ogImage = new URL('/og-placeholder.svg', Astro.site).toString();
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'luqas',
+  url: siteUrl,
+  description:
+    'Finance- & Tech-Nerd an der Schnittstelle von Märkten, Technologie und Online-Kultur.',
+};
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="luqas" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {personSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    )}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+    <header class="site-header">
+      <div class="wrap nav">
+        <a class="logo" href="/">luqas</a>
+        <nav aria-label="Hauptnavigation">
+          <ul class="nav-links">
+            <li>
+              <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
+            </li>
+            <li>
+              <a href="/about" aria-current={path === '/about' ? 'page' : undefined}>Über</a>
+            </li>
+            <li>
+              <a href="/projects" aria-current={path === '/projects' ? 'page' : undefined}
+                >Projekte</a
+              >
+            </li>
+            <li>
+              <a href="/contact" aria-current={path === '/contact' ? 'page' : undefined}
+                >Kontakt</a
+              >
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="wrap" tabindex="-1">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <span>© {new Date().getFullYear()} luqas</span>
+        <span class="footer-tag">Finance, Tech & Internet Culture</span>
+      </div>
+    </footer>
+  </body>
+</html>

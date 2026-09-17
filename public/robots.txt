@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://luqiluqas.github.io/sitemap-index.xml

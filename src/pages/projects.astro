@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const projects = [
+  {
+    title: 'Content & Takes',
+    body: 'Finance/Tech-Kommentare für X und Short-Form',
+  },
+  {
+    title: 'Side Builds',
+    body: 'kleine Tools und Experimente rund um Tech & Märkte',
+  },
+  {
+    title: 'Coming soon',
+    body: 'nächstes Projekt folgt',
+  },
+];
+---
+
+<BaseLayout
+  title="Projekte — Finance, Tech & Builds | luqas"
+  description="Ausgewählte Projekte zu Content, Side Builds und Experimenten rund um Finance & Tech."
+  path="/projects"
+>
+  <section>
+    <h1>Projekte</h1>
+    <div class="cards">
+      {projects.map((p) => (
+        <article class="card">
+          <h2>{p.title}</h2>
+          <p>{p.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Kontakt — luqas"
+  description="Kontakt zu luqas — für Projekte, Kollabs oder einen kurzen Austausch."
+  path="/contact"
+>
+  <section>
+    <h1>Kontakt</h1>
+    <p class="lead">Lust auf ein Projekt oder einen Austausch? Schreib mir.</p>
+
+    <div class="cta-row">
+      <a class="btn" href="mailto:hello@example.com?subject=Nachricht%20an%20luqas"
+        >Nachricht senden</a
+      >
+    </div>
+
+    <p class="meta-note">
+      E-Mail: <a href="mailto:hello@example.com">hello@example.com</a> (Platzhalter) · Socials folgen
+    </p>
+
+    <form
+      class="form"
+      action="mailto:hello@example.com"
+      method="get"
+      enctype="text/plain"
+      aria-label="Kontaktformular"
+    >
+      <label for="contact-name">
+        Name
+        <input
+          id="contact-name"
+          type="text"
+          name="name"
+          placeholder="Dein Name"
+          autocomplete="name"
+          required
+        />
+      </label>
+      <label for="contact-email">
+        E-Mail
+        <input
+          id="contact-email"
+          type="email"
+          name="email"
+          placeholder="du@example.com"
+          autocomplete="email"
+          required
+        />
+      </label>
+      <label for="contact-body">
+        Nachricht
+        <textarea
+          id="contact-body"
+          name="body"
+          placeholder="Worum geht’s?"
+          required
+        ></textarea>
+      </label>
+      <button class="btn" type="submit">Nachricht senden</button>
+    </form>
+  </section>
+</BaseLayout>
